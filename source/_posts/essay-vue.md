@@ -1,5 +1,5 @@
 title: 随手记之Vue.js
-date: 2016-03-26 20:40:03
+date: 2016-03-28 21:40:03
 categories:
 - Javascript
 tags:
@@ -27,22 +27,22 @@ tags:
 [具体使用方法](https://github.com/vuejs/vue-cli#usage)：生成一个工程极为简单，只需一两条命令即可。
 
 ```bash
-$ vue init webpack my-project
+$ vue init webpack my-project     // 使用 webpack 模板生成工程 my-project
 $ cd my-project
 $ npm install
 $ npm run dev
 ```
 然后，借助 `webpack` 与 `vue-loader`, 你可以将一个 `Vue` 组件的模板、核心js代码和CSS写在**一个文件里**，甚至还可以使用 `CSS` 与 `HTML` 的预处理器，像这样：
-<div style="width: 500px;">![](http://vuejs.org.cn/images/vue-component-with-pre-processors.png)</div>
-<small>图片来自[ Vue.js 官方教程 - 构建大型应用](http://vuejs.org.cn/guide/application.html)。</small>
+![](http://vuejs.org.cn/images/vue-component-with-pre-processors.png)  
+<span style="font-size: 0.75em;">图片来自[ Vue.js 官方教程 - 构建大型应用](http://vuejs.org.cn/guide/application.html)。</span>
 
 # 3. Vue-router
-[`vue-router`](https://github.com/vuejs/vue-router/) 是 `vue` 官方提供的路由模块，可以实现 `SPA` 中的路由操作。具体[文档](http://vuejs.github.io/vue-router/zh-cn/index.html)看这里。顺便提一句，`vue-router` 的中文文档已经过时了。
+[`vue-router`](https://github.com/vuejs/vue-router/) 是 `vue` 官方提供的路由模块，可以实现 `SPA` 中的路由操作。具体文档看[这里](http://vuejs.github.io/vue-router/zh-cn/index.html)。顺便提一句，`vue-router` 的中文文档已经过时了。
 
 ## 3.1 初始化
 首先使用 `npm` 安装 `vue-router`, 然后在程序入口点配置 `vue-router`.
 
-```
+```javascript
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from './components/App'                    // 程序的核心 Vue 应用
@@ -95,16 +95,16 @@ router.start(App, '[app]')                           // 挂载 Vue 主应用
 
 ![Vuex Data Flow](http://vuejs.github.io/vuex/en/vuex.png)
 
-## 4.1 初始化
+## 4.1 使用方法
 程序入口点：
-```
+```js
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
 ```
 
 主应用：
-```
+```js
 import store from '../store'
 
 export default {
@@ -114,8 +114,8 @@ export default {
 ```
 
 其它组件：
-```
-expert default {
+```javascript
+export default {
   ...,
   vuex: {
     // 定义 getter 从 store 中获取 state 并注册至应用中
@@ -137,4 +137,7 @@ expert default {
 
 关于 store 及 mutation 的定义方式，请参考[ Vuex 文档](http://vuejs.github.io/vuex/en/tutorial.html)。
 
-没了？
+# 5. 总结 & 后记
+跟 React 相比，个人感觉 Vue 要更容易上手，易于使用，文档也很清楚（比 Hexo 的高到不知道那里去了，前两天被 Hexo 整疯了必须要黑一下它）；Vue 的一系列工具也很易于使用，与 Vue 整合度高，可以在组件中方便地进行操作。
+
+前端课结课，准备退坑了，过几天可能会学习并整理一些后端的知识。

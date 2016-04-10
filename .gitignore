@@ -8,3 +8,4 @@ public/
 .git
 sync_conf.json
 /sync_conf.json
+*.sublime-workspace

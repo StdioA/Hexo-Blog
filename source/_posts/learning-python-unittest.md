@@ -1,6 +1,5 @@
 title: Python学习之unittest
 date: 2015-11-12 18:53:02
-excerpt: "This is my post excerpt"
 categories:
 - Python
 tags:
