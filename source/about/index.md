@@ -56,7 +56,7 @@ C / C++ / Python / Go(刚刚开始) / Node.js
 
 [Coding仓库](https://coding.net/StdioA)
 
-[博客](https://blog.stdioa.com/)（[Github Pages分流](http://stdioa.github.io)）
+[博客](https://blog.stdioa.com/)（[Github Pages分流](https://stdioa.github.io)）
 
 [我的乐谱分享站](http://sheet.stdioa.com/)
 

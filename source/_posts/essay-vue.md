@@ -33,7 +33,7 @@ $ npm install
 $ npm run dev
 ```
 然后，借助 `webpack` 与 `vue-loader`, 你可以将一个 `Vue` 组件的模板、核心js代码和CSS写在**一个文件里**，甚至还可以使用 `CSS` 与 `HTML` 的预处理器，像这样：
-![](http://vuejs.org.cn/images/vue-component-with-pre-processors.png)  
+![](/pics/vue/vue-component-with-pre-processors.png)  
 <span style="font-size: 0.75em;">图片来自[ Vue.js 官方教程 - 构建大型应用](http://vuejs.org.cn/guide/application.html)。</span>
 
 # 3. Vue-router
@@ -93,7 +93,7 @@ router.start(App, '[app]')                           // 挂载 Vue 主应用
 # 4. Vuex
 [`Vuex`](https://github.com/vuejs/vuex/) 是一个借鉴于 `Flux`，但是专门为 `Vue.js` 所设计的状态管理方案。`Flux` 采用了 `Action → Dispatcher → Store → View` 的状态管理机制，而 `Vuex` 跟它差不多：Vue 组件调用 action，action dispatches mutation, mutation 改变 store 中的 state，state 改变 View. 下面是 `Vuex` 的数据流。
 
-![Vuex Data Flow](http://vuejs.github.io/vuex/en/vuex.png)
+![Vuex Data Flow](/pics/vue/vuex.png)
 
 ## 4.1 使用方法
 程序入口点：
