@@ -32,7 +32,7 @@ $ cd my-project
 $ npm install
 $ npm run dev
 ```
-然后，借助 `webpack` 与 `vue-loader`, 你可以将一个 `Vue` 组件的模板、核心js代码和CSS写在**一个文件里**，甚至还可以使用 `CSS` 与 `HTML` 的预处理器，像这样：
+然后，借助 `webpack` 与 `vue-loader`, 你可以将一个 `Vue` 组件的模板、核心js代码和CSS写在**一个文件里**，甚至还可以使用 `CSS` 与 `HTML` 的预处理器，像这样：  
 ![](/pics/vue/vue-component-with-pre-processors.png)  
 <span style="font-size: 0.75em;">图片来自[ Vue.js 官方教程 - 构建大型应用](http://vuejs.org.cn/guide/application.html)。</span>
 

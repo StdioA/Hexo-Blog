@@ -83,7 +83,7 @@ deploy:
     github: git@github.com:StdioA/stdioa.github.io.git,master
     coding: git@git.coding.net:StdioA/Blog.git,master
 
-disqus_shortname: stdioa
+disqus_shortname: false
 duoshuo: stdioa
 
 sitemap:
