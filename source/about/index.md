@@ -1,6 +1,6 @@
 title: 关于我
 
-date: 2016-03-22 20:57:23
+date: 2016-11-15 22:10:00
 
 comments: false
 
@@ -10,21 +10,21 @@ comments: false
 
 ## 简介
 
-昵称：什么是昵称`0.0`
+昵称：小戴。很多姓戴的人都有这样一个昵称:joy:
 
 南京航空航天大学 2013级 信息安全专业
 
 天天缺觉的“特困生”，然而现在却在坚持早起
 
-不敢说自己会写代码，只好闲的没事卖卖萌
-
 被同学称为“金陵丈量者”，希望有一天能够走遍南京
+
+[LCTT](http://lctt.github.io/) 成员，希望成为全栈的后端工程师
 
 **人生苦短，我用Python**
 
 ## 爱好
 
-羽毛球、音乐、钢琴、咖啡，当然还有编程，平时周末出去浪一浪玩一玩~
+羽毛球、乒乓球、音乐、钢琴、咖啡，当然还有编程，平时周末出去浪一浪玩一玩~
 
 ## 涉猎领域
 
@@ -61,7 +61,5 @@ C / C++ / Python / Go(刚刚开始) / Node.js
 [我的乐谱分享站](http://sheet.stdioa.com/)
 
 ## 联系我
-
-E-mail: stdio_dai@nuaa.edu.cn
-
+E-mail: c3RkaW9hQDE2My5jb20=  
 Telegram: [@StdioA](https://telegram.me/StdioA)
