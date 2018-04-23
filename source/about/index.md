@@ -1,6 +1,6 @@
 title: 关于我
 
-date: 2016-11-15 22:10:00
+date: 2018-04-23 21:10:00
 
 comments: false
 
@@ -10,21 +10,21 @@ comments: false
 
 ## 简介
 
-昵称：小戴。很多姓戴的人都有这样一个昵称:joy:
+昵称：小戴。很多姓戴的人都有这样一个昵称 :joy:
 
 南京航空航天大学 2013级 信息安全专业
 
-天天缺觉的“特困生”，然而现在却在坚持早起
+[LCTT](http://lctt.github.io/) 成员，[扇贝网](https://www.shanbay.com/)后端工程师
+
+曾经是天天缺觉的“特困生”，然而现在天天早睡早起（算是吧）
 
 被同学称为“金陵丈量者”，希望有一天能够走遍南京
 
-[LCTT](http://lctt.github.io/) 成员，希望成为全栈的后端工程师
+**人生苦短，我用 Python**
 
-**人生苦短，我用Python**
+## 业余爱好
 
-## 爱好
-
-羽毛球、乒乓球、音乐、钢琴、咖啡，当然还有编程，平时周末出去浪一浪玩一玩~
+羽毛球、乒乓球、古典音乐、钢琴、咖啡。
 
 ## 涉猎领域
 
@@ -38,15 +38,15 @@ C / C++ / Python / Go(刚刚开始) / Node.js
     * 组件库：React.js(会一点) / Vue.js (Vue.js + vuex + vue-router)
     * 样式库：Semantic UI
 
-后端: PHP / Python (bottle & flask & Django) / Node.js(Express)
+后端: Python (bottle & flask & Django) / Node.js(Express)
 
-数据库: MySQL / MongoDB / Redis(了解)
+数据库: MySQL / MongoDB（了解） / Redis
 
 ###### 编程工具
 
 代码编辑器: Sublime Text
 
-版本控制: Git
+版本控制: Git（熟练）
 
 代码构建: gulp, babel, webpack
 
@@ -62,4 +62,4 @@ C / C++ / Python / Go(刚刚开始) / Node.js
 
 ## 联系我
 E-mail: c3RkaW9hQDE2My5jb20=  
-Telegram: [@StdioA](https://telegram.me/StdioA)
+Telegram: [@StdioA](https://t.me/StdioA)

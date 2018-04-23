@@ -12,8 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://127.0.0.1:43110
-root: /1J2sRyoZa9KubcJGHZ6KAuzBtXGKLefxqw/
+url: //blog.stdioa.com/
+root: /
 permalink: :year/:month/:title/
 # permalink: :title/
 permalink_defaults:
@@ -73,24 +73,24 @@ feed:
 ## Themes: http://hexo.io/themes/
 
 theme: yilia
-# theme: hueman
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
-# deploy: 
-#   type: git
-#   repo: 
-#     github: git@github.com:StdioA/stdioa.github.io.git,master
-#     coding: git@git.coding.net:StdioA/Blog.git,master
+deploy: 
+  type: git
+  repo: 
+    github: git@github.com:StdioA/stdioa.github.io.git,master
+    coding: git@git.coding.net:StdioA/Blog.git,master
 
-disqus_shortname: stdioa
+disqus_shortname: false
+duoshuo: stdioa
 
 sitemap:
-	path: googlesitemap.xml
+  path: googlesitemap.xml
 baidusitemap:
   path: baidusitemap.xml
 
-markdown:
+markdown_it_plus:
   render:
     html: true
     xhtmlOut: false
@@ -98,13 +98,4 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
-  plugins:
-    - markdown-it-footnote
-    - markdown-it-sup
-    - markdown-it-sub
-    - markdown-it-abbr
-    - markdown-it-emoji
-    - markdown-it-anchor
-
-# toc:
-#   maxDepth: 3
+    pre_class: highlight
