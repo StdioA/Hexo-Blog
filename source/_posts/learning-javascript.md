@@ -22,11 +22,11 @@ tags:
     var a;                          // 防止变量作用域提升
     do_something();
 }());
-
+ 
 some_list.map(function (obj) {
         this.do_something(obj);
     }, this);                       // 把this传到map里面的匿名函数中，否则里面的this为undefined
-
+ 
 setInterval(function () {}, 1000);
 setTimeout(function () {}, 1000);
 ```
@@ -51,6 +51,84 @@ $("ul>li:even")         // 选择所有奇数li元素（odd同理）
 * `cheerio`, 在服务器端解析html，跟jQuery用法差不多
 * `chalk`, 输出彩色文字
 * `gulp`, 流式自动化构建工具，后面细写
+
+---
+May.2 2017 更新
+## 3.1 Node.js 文档阅读笔记
+### 3.1.1 console.timer
+计时工具。
+
+```javascript
+console.time('100-elements');
+for (let i = 0; i < 100; i++);
+console.timeEnd('100-elements');
+// 100-elements: 0.238ms
+```
+
+### 3.1.2 Buffer
+Buffer 在处理文件或流时可能会用到，在处理文件时，跟 Python 的 bytes 有些相似。
+
+创建 Buffer: `Buffer.alloc(10)` 或 `Buffer.from([1, 2, 3])`；  
+长度： `buf.length`；  
+切分： `buf.slice([start, [end]])`；  
+字符串与 Buffer 转换：
+```javascript
+> b = Buffer.from("哦")
+<Buffer e5 93 a6>
+> b[0]
+229
+> b.toString('utf-8')
+'哦'
+> b.toString('base64')
+'5ZOm'
+```
+
+### 3.1.3 child_process
+生成子进程，执行文件：
+```javascript
+const spawn = require('child_process').spawn;
+const ls = spawn('ls', ['-lh', '/usr']);
+ 
+ls.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+ 
+ls.stderr.on('data', (data) => {
+  console.log(`stderr: ${data}`);
+});
+ 
+ls.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
+```
+
+如果进程可以立即结束（比如 ls），或者不需要实时查看 stdout 的输出，可以使用 `child_process.exec`:
+
+```javascript
+const exec = require('child_process').exec;
+exec('cat *.js bad_file | wc -l', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});
+```
+
+### 3.1.4 Path
+用于处理文件路径，跟 os.path 类似。
+
+```javascript
+path.join('/foo', 'bar', 'baz/asdf', 'quux', '..')
+// Returns: '/foo/bar/baz/asdf'
+ 
+path.normalize('/a/b//../c/./d/')
+'/a/c/d/'
+ 
+path.relative('/data/orandea/test/aaa', '/data/orandea/impl/bbb')
+// Returns: '../../impl/bbb'
+```
 
 # 4. React.js
 
@@ -103,7 +181,7 @@ gulp.task('render', ['array', 'of', 'task', 'names'], function () {
         .pipe(minify())                                                 // minify
         .pipe(gulp.dest('./build/minified_templates'));                 // 输出到另一目录
 });
-
+ 
 gulp.task('watch', ["compress"], function () {
     var watcher = gulp.watch('./public/src/*.jsx', ['compress']);       // 监控文件，若文件变化则执行compress任务
     watcher.on('change', function (event) {                             // 监听change事件

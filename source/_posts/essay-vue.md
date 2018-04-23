@@ -48,7 +48,7 @@ import Router from 'vue-router'
 import App from './components/App'                    // 程序的核心 Vue 应用
 import HomePageView from './components/HomePageView'  // 导入所有的 View 组件
 import ItemView from './components/ItemView'
-
+ 
 Vue.use(Router)                                       // Vue 配置
 var router = new Router()                             // 生成路由对象
 router.map({                                          // 配置路由
@@ -65,11 +65,11 @@ router.map({                                          // 配置路由
     component: ItemView
   }
 }
-
+ 
 router.redirect({                                   // 设置重定向选项
   '*': '/home'
 })
-
+ 
 router.start(App, '[app]')                           // 挂载 Vue 主应用
 ```
 

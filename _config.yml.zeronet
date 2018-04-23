@@ -12,8 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: //blog.stdioa.com/
-root: /
+url: http://127.0.0.1:43110
+root: /1J2sRyoZa9KubcJGHZ6KAuzBtXGKLefxqw/
 permalink: :year/:month/:title/
 # permalink: :title/
 permalink_defaults:
@@ -77,14 +77,13 @@ theme: yilia
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
-deploy: 
-  type: git
-  repo: 
-    github: git@github.com:StdioA/stdioa.github.io.git,master
-    coding: git@git.coding.net:StdioA/Blog.git,master
+# deploy: 
+#   type: git
+#   repo: 
+#     github: git@github.com:StdioA/stdioa.github.io.git,master
+#     coding: git@git.coding.net:StdioA/Blog.git,master
 
-disqus_shortname: false
-duoshuo: stdioa
+disqus_shortname: stdioa
 
 sitemap:
 	path: googlesitemap.xml
