@@ -28,19 +28,24 @@ comments: false
 
 ## 涉猎领域
 
-###### 本地程序
+###### 编程语言
 
 C / C++ / Python / Go(刚刚开始) / Node.js
 
-###### 网络开发
+###### Web 开发
 
 * 前端: HTML / CSS / Javascript(ES6)
     * 组件库：React.js(会一点) / Vue.js (Vue.js + vuex + vue-router)
     * 样式库：Semantic UI
 
-后端: Python (bottle & flask & Django) / Node.js(Express)
+后端:
+Web 框架：Flask / Django / Bottle / Express
+RPC 框架：gRPC / [sea](https://github.com/shanbay/sea/)
 
 数据库: MySQL / MongoDB（了解） / Redis
+
+###### DevOps
+Kubernetes / GitLab CI/CD
 
 ###### 编程工具
 

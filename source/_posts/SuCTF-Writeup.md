@@ -178,7 +178,7 @@ int main() {
 一开始在想，为啥 mips 要放在 Mobile 里？后来想到有些路由器是 mips 架构的，没毛病。
 
 ## Mob300
-[文件](/suctf/Naive.apk)。  
+[文件](/suctf/Naive_apk)。  
 解压 apk，能看到里面的动态链接库。随便找了个 `x86` 的，反编译出来，在里面找各种常量，最后找到了几段字符串拼起来的 flag: `suctf{Meet_jni_50_fun}`.
 
 这个题也像是逆向…

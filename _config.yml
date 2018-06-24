@@ -67,6 +67,11 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
@@ -82,7 +87,7 @@ deploy:
     github: git@github.com:StdioA/stdioa.github.io.git,master
     coding: git@git.coding.net:StdioA/Blog.git,master
 
-disqus_shortname: false
+disqus_shortname: stdioa
 duoshuo: stdioa
 
 sitemap:
