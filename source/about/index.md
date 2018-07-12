@@ -1,11 +1,9 @@
+---
 title: 关于我
-
-date: 2018-04-23 21:10:00
-
+description: 个人简介
+layout: about
 comments: false
-
-## layout: about
-
+sidebar: custom
 ---
 
 ## 简介

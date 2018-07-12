@@ -5,6 +5,7 @@ categories:
 tags:
 - python
 - virtualenv
+toc: true
 
 ---
 

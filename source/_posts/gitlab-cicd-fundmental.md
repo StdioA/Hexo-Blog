@@ -7,6 +7,8 @@ tags:
   - GitLab
   - CI/CD
 date: 2018-06-06 15:46:00
+toc: true
+
 ---
 最近玩了 GitLab CI/CD 平台，通过搭建这个平台也收获了一些关于 DevOps 的基本技能，打算通过几篇文章来讲述一下 GitLab CI/CD 平台的构建及应用。本文对 GitLab CI/CD 以及 CI/CD 流程定义文件的写法做了简要介绍。
 

@@ -6,6 +6,7 @@ tags:
 - Javascript
 - node.js
 - 前端开发
+toc: true
 
 ---
 
@@ -51,6 +52,7 @@ $("ul>li:even")         // 选择所有奇数li元素（odd同理）
 * `cheerio`, 在服务器端解析html，跟jQuery用法差不多
 * `chalk`, 输出彩色文字
 * `gulp`, 流式自动化构建工具，后面细写
+toc: true
 
 ---
 May.2 2017 更新

@@ -7,6 +7,8 @@ tags:
 categories:
   - DevOps
 date: 2018-06-23 20:53:00
+toc: true
+
 ---
 前两篇我们讲了 GitLab CI/CD 的简单应用及部署方式，这一篇简单讲一下如何将 GitLab CI/CD 与日常开发部署流程结合。
 
@@ -107,7 +109,8 @@ spec:
   - protocol: TCP
     port: 2375
     targetPort: 2375
-  clusterIP: None
+  clusterIP: Nonetoc: true
+
 ---
 kind: Endpoints
 apiVersion: v1
@@ -160,7 +163,8 @@ metadata:
   name: deployer
   namespace: cicd
 imagePullSecrets:
-- name: dockersecret
+- name: dockersecrettoc: true
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -169,7 +173,8 @@ metadata:
 rules:
   - apiGroups: ["extensions"]
     resources: ["deployments"]
-    verbs: ["get", "patch"]
+    verbs: ["get", "patch"]toc: true
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

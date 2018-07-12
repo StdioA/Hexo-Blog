@@ -5,6 +5,7 @@ categories:
 tags:
 - MySQL
 - Django
+toc: true
 
 ---
 

@@ -7,6 +7,8 @@ tags:
   - GitLab
   - CI/CD
 date: 2018-06-18 15:46:00
+toc: true
+
 ---
 
 本文是 GitLab CI/CD 系列的第二篇，主要介绍 GitLab CI Runner 在 Docker 和 Kubernetes 环境下的部署方式。
@@ -70,7 +72,8 @@ runner 的配置注入有两种方式：
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cicd
+  name: cicdtoc: true
+
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -78,7 +81,8 @@ metadata:
   name: executor
   namespace: cicd
 imagePullSecrets:
-- name: dockersecret
+- name: dockersecrettoc: true
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -89,7 +93,8 @@ rules:
   # runner 要新建 pod，所以为它赋予 pod 相关的权限
   - apiGroups: [""]
     resources: ["pods", "pods/exec"]
-    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]toc: true
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -103,7 +108,8 @@ subjects:
 roleRef:
   kind: Role
   name: executor
-  apiGroup: rbac.authorization.k8s.io
+  apiGroup: rbac.authorization.k8s.iotoc: true
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -134,7 +140,8 @@ data:
   KUBERNETES_TERMINATIONGRACEPERIODSECONDS: "10"
   KUBERNETES_POLL_INTERVAL: "5"
   KUBERNETES_POLL_TIMEOUT: "360"
-  KUBERNETES_IMAGE: "kubectl:1.8.1"
+  KUBERNETES_IMAGE: "kubectl:1.8.1"toc: true
+
 ---
 apiVersion: apps/v1beta2
 kind: Deployment

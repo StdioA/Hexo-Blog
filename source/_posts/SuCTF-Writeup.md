@@ -5,6 +5,8 @@ categories:
 tags:
 - CTF
 - 脑洞
+toc: true
+
 ---
 
 又玩了一场 CTF，虽然是个人赛，但是有老司机带我飞。继续开脑洞，也学到了不少，做了很多之前没做过的题。
@@ -30,7 +32,45 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
  
-//----- (0804865D) --------------------------------------------------------
+//toc: true
+
+----- (0804865D) toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+-----
 int getflag()
 {
   char format; // [sp+14h] [bp-84h]@4
@@ -293,8 +333,75 @@ codecs.encode('fhpgs{CP9PuHsGx#}', 'rot13')
 ```
 $ binwalk xu.jpg
  
-DECIMAL         HEX             DESCRIPTION
--------------------------------------------------------------------------------------------------------
+DECIMAL         HEX             DESCRIPTIONtoc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+---toc: true
+
+----
 46046           0xB3DE          RAR archive data
  
 $ dd if=xu.jpg of=xu.rar bs=1 skip=46046

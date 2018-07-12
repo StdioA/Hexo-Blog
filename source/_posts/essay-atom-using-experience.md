@@ -7,6 +7,7 @@ tags:
 - Sublime Text
 - 文本编辑器
 - Git
+toc: true
 
 ---
 
