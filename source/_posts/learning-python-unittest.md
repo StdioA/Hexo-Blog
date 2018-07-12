@@ -7,6 +7,7 @@ tags:
 - unittest
 toc: true
 
+
 ---
 
 单元测试，工程开发中重要的一环。
@@ -102,53 +103,8 @@ Empty testcase ... ok
 test_index (__main__.TestStringMethods)
 Index testcase ... ok
 test_instance (__main__.TestStringMethods) ... ok
-toc: true
 
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
-----
+----------------------------------------------------------------------
 Ran 5 tests in 0.001s
 
 OK
@@ -196,53 +152,8 @@ test_with_nose.test_obviously_failed ... FAIL
 test_with_nose.test_returns_an_exception ... ERROR
 
 ======================================================================
-ERROR: test_with_nose.test_returns_an_exceptiontoc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
-----
+ERROR: test_with_nose.test_returns_an_exception
+----------------------------------------------------------------------
 Traceback (most recent call last):
   File "c:\python35\lib\site-packages\nose\case.py", line 198, in runTest
     self.test(*self.arg)
@@ -251,106 +162,16 @@ Traceback (most recent call last):
 ValueError
 
 ======================================================================
-FAIL: test_with_nose.test_obviously_failedtoc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
-----
+FAIL: test_with_nose.test_obviously_failed
+----------------------------------------------------------------------
 Traceback (most recent call last):
  File "c:\python35\lib\site-packages\nose\case.py", line 198, in runTest
    self.test(*self.arg)
   File "C:\Users\Stdio\Desktop\temp\utest\test_with_nose.py", line 10, in test_obviously_failed
    assert False
 AssertionError
-toc: true
 
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
-----
+----------------------------------------------------------------------
 Ran 3 tests in 0.003s
 
 FAILED (errors=1, failures=1)
@@ -360,9 +181,7 @@ FAILED (errors=1, failures=1)
 1. [unitest - Python Doc](https://docs.python.org/3/library/unittest.html)
 2. [单元测试 - 廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143191629979802b566644aa84656b50cd484ec4a7838000)
 3. [Nose documentation](https://nose.readthedocs.org/en/latest/)
-4. [Python的学习（十八）toc: true
-
----- 单元测试工具nose](http://blog.csdn.net/linda1000/article/details/8533349)
+4. [Python的学习（十八）---- 单元测试工具nose](http://blog.csdn.net/linda1000/article/details/8533349)
 
 # 5. 后记
 拖了一个月，这个坑再不填日子没法过了(╯‵□′)╯︵┻━┻ 

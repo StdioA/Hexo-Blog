@@ -109,7 +109,7 @@ spec:
   - protocol: TCP
     port: 2375
     targetPort: 2375
-  clusterIP: Nonetoc: true
+  clusterIP: None
 
 ---
 kind: Endpoints
@@ -163,7 +163,7 @@ metadata:
   name: deployer
   namespace: cicd
 imagePullSecrets:
-- name: dockersecrettoc: true
+- name: dockersecret
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -173,7 +173,7 @@ metadata:
 rules:
   - apiGroups: ["extensions"]
     resources: ["deployments"]
-    verbs: ["get", "patch"]toc: true
+    verbs: ["get", "patch"]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1

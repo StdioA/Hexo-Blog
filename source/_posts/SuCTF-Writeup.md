@@ -32,45 +32,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
  
-//toc: true
-
------ (0804865D) toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
------
+//----- (0804865D) --------------------------------------------------------
 int getflag()
 {
   char format; // [sp+14h] [bp-84h]@4
@@ -333,75 +295,8 @@ codecs.encode('fhpgs{CP9PuHsGx#}', 'rot13')
 ```
 $ binwalk xu.jpg
  
-DECIMAL         HEX             DESCRIPTIONtoc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
----toc: true
-
-----
+DECIMAL         HEX             DESCRIPTION
+-------------------------------------------------------------------------------------------------------
 46046           0xB3DE          RAR archive data
  
 $ dd if=xu.jpg of=xu.rar bs=1 skip=46046

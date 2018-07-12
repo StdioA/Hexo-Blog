@@ -72,7 +72,7 @@ runner 的配置注入有两种方式：
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cicdtoc: true
+  name: cicd
 
 ---
 apiVersion: v1
@@ -81,7 +81,7 @@ metadata:
   name: executor
   namespace: cicd
 imagePullSecrets:
-- name: dockersecrettoc: true
+- name: dockersecret
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -93,7 +93,7 @@ rules:
   # runner 要新建 pod，所以为它赋予 pod 相关的权限
   - apiGroups: [""]
     resources: ["pods", "pods/exec"]
-    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]toc: true
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -108,7 +108,7 @@ subjects:
 roleRef:
   kind: Role
   name: executor
-  apiGroup: rbac.authorization.k8s.iotoc: true
+  apiGroup: rbac.authorization.k8s.io
 
 ---
 apiVersion: v1
@@ -140,7 +140,7 @@ data:
   KUBERNETES_TERMINATIONGRACEPERIODSECONDS: "10"
   KUBERNETES_POLL_INTERVAL: "5"
   KUBERNETES_POLL_TIMEOUT: "360"
-  KUBERNETES_IMAGE: "kubectl:1.8.1"toc: true
+  KUBERNETES_IMAGE: "kubectl:1.8.1"
 
 ---
 apiVersion: apps/v1beta2

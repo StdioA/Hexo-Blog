@@ -168,7 +168,6 @@ DRF 提供了一系列工具来协助 RESTful API 测试，比如 `rest_framewor
 
 教程结束。  
 这两天我还会继续看 DRF，后面还会继续更新相关内容。
-toc: true
 
 ---
 
