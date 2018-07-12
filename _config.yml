@@ -1,21 +1,21 @@
 # Hexo Configuration
-## Docs: http://hexo.io/docs/configuration.html
+## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
 title: Stdio's Blog
 subtitle: 随便写写
 description:
+keywords:
 author: David Dai
 language: zh-CN
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://blog.stdioa.com
 root: /
 permalink: :year/:month/:title/
-# permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -43,12 +43,20 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace: space
-
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
 # Category & Tag
 default_category: uncategorized
 category_map:
 tag_map:
-
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -72,9 +80,6 @@ feed:
   content_limit: 140
   content_limit_delim: ' '
 
-toc:
-  maxdepth: 3
-
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
@@ -97,26 +102,36 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
+# Config for hexo-generator-markdown-it
+# markdown:
+#   render:
+#     html: true
+#     xhtmlOut: false
+#     breaks: true
+#     linkify: true
+#     typographer: true
+#     quotes: '“”‘’'
+#   plugins:
+#     - markdown-it-emoji
+#   anchors:
+#     level: 2
+#     collisionSuffix: 'v'
+#     permalink: true
+#     permalinkClass: header-anchor
+#     permalinkSymbol: '#'
+
+# Config for hexo-generator-markdown-it-plus
 markdown_it_plus:
-  render:
+    highlight: true
     html: true
-    xhtmlOut: false
-    breaks: false
+    xhtmlOut: true
+    breaks: true
+    langPrefix:
     linkify: true
-    typographer: true
-    quotes: '“”‘’'
+    typographer:
+    quotes: “”‘’
     pre_class: highlight
-  anchors:
-    # Minimum level for ID creation. (Ex. h2 to h6)
-    level: 2
-    # A suffix that is prepended to the number given if the ID is repeated.
-    collisionSuffix: 'v'           
-    # If `true`, creates an anchor tag with a permalink besides the heading.
-    permalink: false              
-    # Class used for the permalink anchor tag.
-    permalinkClass: header-anchor 
-    # The symbol used to make the permalink
-    permalinkSymbol: ¶
+
 
 # hexo-neat
 neat_enable: true
@@ -133,5 +148,4 @@ neat_js:
   output:
   compress:
   exclude:
-    - '*.min.js' 
-
+    - '*.min.js'
