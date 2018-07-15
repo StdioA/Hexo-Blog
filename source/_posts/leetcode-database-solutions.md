@@ -16,7 +16,9 @@ toc: true
 
 今天把答案整理一下。喔，题库在[这里](https://leetcode.com/problemset/database/)。
 
-# [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)
+# 175. Combine Two Tables
+
+<https://leetcode.com/problems/combine-two-tables/>
 
 样例中有些人的 `PersonId` 无法在 `Address` 表中找到，所以使用 `LEFT JOIN`.
 
@@ -27,7 +29,9 @@ LEFT JOIN Address
 ON Person.PersonId = Address.PersonId;
 ```
 
-# [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)
+# 176. Second Highest Salary
+
+<https://leetcode.com/problems/second-highest-salary/>
 
 `UNION` 查询，在结果的最后添加一个 `NULL`, 若不存在第二高的薪水则会选择 `NULL`.
 
@@ -39,7 +43,9 @@ ORDER BY Salary DESC
 LIMIT 1, 1;
 ```
 
-# [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/)
+# 177. Nth Highest Salary
+
+<https://leetcode.com/problems/nth-highest-salary/>
 
 这个不知道为什么不可以用 `LIMIT 1, N-1`，所以用了 `IF` 函数。
 
@@ -59,7 +65,9 @@ BEGIN
 END
 ```
 
-# [178. Rank Scores](https://leetcode.com/problems/rank-scores/)
+# 178. Rank Scores
+
+<https://leetcode.com/problems/rank-scores/>
 
 ```SQL
 SELECT Score, (
@@ -71,7 +79,9 @@ FROM Scores AS o
 ORDER BY Score DESC;
 ```
 
-# [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)
+# 180. Consecutive Numbers
+
+<https://leetcode.com/problems/consecutive-numbers/>
 
 暴力查询:joy:
 
@@ -83,7 +93,9 @@ WHERE l1.Id+1 = l2.Id AND l2.Id+1 = l3.Id
 
 ```
 
-# [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)
+# 181. Employees Earning More Than Their Managers
+
+<https://leetcode.com/problems/employees-earning-more-than-their-managers/>
 
 选择雇员，根据 `ManagerId` 找到雇员上司的薪水，然后进行比较即可。
 
@@ -97,7 +109,9 @@ WHERE Salary > (
         );
 ```
 
-# [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)
+# 182. Duplicate Emails
+
+<https://leetcode.com/problems/duplicate-emails/>
 
 按 `Email` 字段进行分类，使用 `HAVING` 筛选出相同 `Email` 数量大于 1 的项。
 
@@ -107,7 +121,9 @@ GROUP BY Email
 HAVING COUNT(Email)>1;
 ```
 
-# [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/)
+# 183. Customers Who Never Order
+
+<https://leetcode.com/problems/customers-who-never-order/>
 
 这个也是直接查询…
 
@@ -119,7 +135,9 @@ WHERE (SELECT COUNT(*)
        WHERE c.id = Orders.CustomerId) = 0;
 ```
 
-# [184. Department Highest Salary](https://leetcode.com/problems/department-highest-salary/)
+# 184. Department Highest Salary
+
+<https://leetcode.com/problems/department-highest-salary/>
 
 基本上就是直接查询，注意 `WHERE` 语句中判别条件的位置，否则有可能 TLE:joy:
 
@@ -134,7 +152,9 @@ WHERE e.DepartmentId = d.Id
                 WHERE e.DepartmentId = e2.DepartmentId);
 ```
 
-# [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/)
+# 185. Department Top Three Salaries
+
+<https://leetcode.com/problems/department-top-three-salaries/>
 
 输出每个部门薪资最高的三个人。这个题里有个坑，如果两个人薪资相同，那么这两个人并列，都要输出。并且如果四个人的薪资为 3 2 2 1， 薪资为 1 的那个人排第 3 :joy:
 
@@ -151,7 +171,9 @@ WHERE e.DepartmentId = d.Id
 ORDER BY Department, Salary DESC;
 ```
 
-# [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)
+# 196. Delete Duplicate Emails
+
+<https://leetcode.com/problems/delete-duplicate-emails/>
 
 MySQL 不允许在删除时依据待删除的表进行筛选 (You can't specify target table'Person' for update in FROM clause), 所以要绕一下。
 
@@ -173,7 +195,9 @@ WHERE Id IN (SELECT * FROM(                         # 绕一下，先挑出所�
                       );
 ```
 
-# [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/)
+# 197. Rising Temperature
+
+<https://leetcode.com/problems/rising-temperature/>
 
 主要考 `MySQL` 的日期操作函数。
 
@@ -184,7 +208,9 @@ WHERE datediff(w1.Date, w2.Date) = 1
   AND w1.Temperature > w2.Temperature;
 ```
 
-# [262. Trips and Users](https://leetcode.com/problems/trips-and-users/)
+# 262. Trips and Users
+
+<https://leetcode.com/problems/trips-and-users/>
 
 太乱了，没做:disappointed_relieved:
 
