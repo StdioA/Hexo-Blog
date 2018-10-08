@@ -18,6 +18,9 @@ toc: true
 # 0. TL;DR
 文档在[这儿](https://docs.gitlab.com/runner/)。
 
+Changelog:
+* 2018-10-08 21:05 补上缺失的 k8s `Secret` 定义文件。
+
 # 1. GitLab Runner 的运行环境及执行环境选择
 GitLab Runner 用 Go 语言写成，最后打包成单文件进行分发，所以可以在很多平台下快速运行，包括 Windows / GNU Linux / MacOS 等，同时也提供 Docker 镜像，方便在 Docker / Kubernetes 环境中部署。
 
@@ -141,6 +144,15 @@ data:
   KUBERNETES_POLL_INTERVAL: "5"
   KUBERNETES_POLL_TIMEOUT: "360"
   KUBERNETES_IMAGE: "kubectl:1.8.1"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab-ci-token
+  namespace: cicd
+type: Opaque
+data:
+  token: aGhoaGhoaGg=
 
 ---
 apiVersion: apps/v1beta2
