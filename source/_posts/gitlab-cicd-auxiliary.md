@@ -5,7 +5,7 @@ tags:
   - GitLab
   - CI/CD
 categories:
-  - Devops
+  - DevOps
 date: 2018-07-15 20:21:00
 toc: true
 
