@@ -7,6 +7,8 @@ tags:
 categories:
   - Devops
 date: 2018-07-15 20:21:00
+toc: true
+
 ---
 本文会讲一些在 GitLab CI/CD 中可能会用到的辅助工具，包括隐藏任务、依赖缓存、定时任务以及部署环境。
 
