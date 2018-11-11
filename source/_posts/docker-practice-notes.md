@@ -9,7 +9,7 @@ date: 2018-10-30 21:14:00
 toc: true
 
 ---
-这几天看了《Docker 实践》，写了一点自己不知道或者想记录下来的内容，所以是一份笔记，但不是一份基础教程。
+这几天看了《Docker 实践》，写了一点自己不知道或者想记录下来的内容。这是一份笔记，但不是一份基础教程。
 
 <!--more-->
 
@@ -44,9 +44,9 @@ Docker 容器修改文件时会使用**写时复制**（copy-on-write）的方�
     | on-failure[:max-retry] | 只在失败时（返回非 0 状态码）时重启 |
 
 2. 如果想要移动 Docker 存储数据的位置，则在启动 `docker daemon` 时，使用 `-g` 参数并指定新位置；
-3. 实现容器间通信：在 `docker run` 时使用 `--link <hostport>:<container>:<containerport>` 参数可以将另外一个容器的某个端口映射到当前容器的端口中以；  
+3. 实现容器间通信：在 `docker run` 时使用 `--link <hostport>:<container>:<containerport>` 参数可以将另外一个容器的某个端口映射到当前容器的端口中；  
     实现原理是更改当前容器的 `hosts` 文件；  
-    前提条件：构建镜像时必须用 `EXPOSE` 命令暴露容器的端口。
+    但这种映射方式有一个前提条件：构建镜像时必须用 `EXPOSE` 命令暴露容器的端口。
 4. 在线查找镜像：使用 `docker search` 功能。
 
 # 2. 第二部分：Docker 与开发
@@ -87,7 +87,7 @@ Docker 和虚拟机的差异：
 
 ### 对镜像的操作
 * 扁平化镜像
-    如果想将镜像中的多层合为一层（如在某层中添加了密钥又在后面删除），则可以在运行容器之后，使用 `docker export <container> | docker import some-image` 来讲容器的**目录结构**导出为 tar 文件，然后再以此重新制作镜像。这样的镜像只会有一层。
+    如果想将镜像中的多层合为一层（如在某层中添加了密钥又在后面删除），则可以在运行容器之后，使用 `docker export <container> | docker import some-image` 来将容器的**目录结构**导出为 tar 文件，然后再以此重新制作镜像。这样的镜像只会有一层。
 
 * 对容器进行逆向工程
     书里有个脚本，但是不能用；从 [StackOverFlow](https://stackoverflow.com/questions/19104847/how-to-generate-a-dockerfile-from-an-image) 上找了一个可以用，但是都不如我在 [Portainer](https://portainer.io/) 里看的全:joy:  
@@ -164,6 +164,20 @@ PS: 刚刚遇到了一个宿主机文件更改但未同步至容器的问题，�
 
 ## 微服务架构
 etcd 可作为环境的中央配置存储，服务发现可以用 etcd、confd 及 nginx 的组合来实现。
+
+## 共享 Docker 对象
+`docker export` 和 `docker save` 命令的区别：  
+1. `docker export` 作用于容器，而 `docker save` 作用于镜像；
+2. `docker export` 会将容器的文件系统以**平面化**形式导出，镜像的**元信息和层次结构结构**会被忽略，而 `docker save` 会将镜像的所有信息导出，包括镜像的元信息，以及每一层的内容。
+
+附一个书中的对比表格，对里面的一些内容作了更改：
+
+| 命令 | 目标类型 | 内容来源 | 产出物 | 
+| - | - | - | - |
+| export | 容器文件系统 | 容器 | TAR 包 |
+| import | 平面文件系统 | TAR 包 | Docker 镜像 | 
+| save | Docker 镜像（带历史记录）| Docker 镜像 | TAR 包 |
+| load | Docker 镜像（带历史记录) | TAR 包 | Docker 镜像 |
 
 ## 网络模拟：无痛的现实环境测试
 ### Docker Compose: 管理容器间链接

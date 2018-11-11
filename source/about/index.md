@@ -61,6 +61,8 @@ Kubernetes / GitLab CI/CD
 
 [博客](https://blog.stdioa.com/)（[Github Pages分流](https://stdioa.github.io)）
 
+[LCTT 主页](https://linux.cn/lctt/StdioA)
+
 [我的乐谱分享站](http://sheet.stdioa.com/)
 
 ## 联系我

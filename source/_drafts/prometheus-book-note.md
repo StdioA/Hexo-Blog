@@ -190,3 +190,151 @@ Prometheus 鼓励大家设计多层指标，从多个维度监控到所有东西
 * 四个黄金指标：延迟、通讯量、错误发生速率、饱和度
 * RED 方法：请求速率、请求错误（每秒失败的请求数）、请求耗时
 * USE 方法（用于甄别系统性能问题）：使用率、饱和度、错误计数
+
+
+# 第 3 章：Prometheus 告警处理
+
+## 基本概念
+Prometheus Server 负责存储告警规则并产生告警，而告警的具体处理方式（如发邮件通知用户）则交由 Alertmanager 来做。
+
+> Alertmanage 作为一个独立的组件，负责**接收并处理**来自 Prometheus Server(也可以是其它的客户端程序)的告警信息。Alertmanager 可以对这些告警信息进行进一步的处理，比如**消除重复的告警信息**，**对告警信息进行分组并且路由到正确的接受方**。Prometheus 内置了对邮件，Slack 等通知方式的支持，同时还支持与 Webhook 的通知集成，以支持更多的可能性，例如可以通过 Webhook 与钉钉或者企业微信进行集成。同时 AlertManager 还提供了**静默和告警抑制机制**来对告警通知行为进行优化。
+
+## 告警规则定义
+在 Prometheus 配置文件中通过 `rule_files` 指定一组告警规则文件的访问路径。  
+设置规则后，Prometheus 会根据 `global.evaluation_interval` 定义的时间周期计算报警规则中定义的 PromQL 表达式。如果表达式能够找到匹配的时间序列，则会对每条序列产生一个告警实例。  
+Prometheus 告警配置规则如下：
+
+```yaml
+groups:
+- name: example
+  rules:
+  - alert: HighErrorRate
+    expr: job:request_latency_seconds:mean5m{job="myjob"} > 0.5
+    for: 1m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency for {{ $labels.job }}：{{ $value }}
+      description: description info
+```
+
+其中，`annotations` 定义的标注部分内容可以进行模板化：`{{ $labels.labelname }}` 可以访问告警实例中标签的值，而 `{{ $value }}` 可以访问表达式算出的样本值。
+
+假设 Prom Server 每 10s 计算一次，则当第一个满足条件的报警出现时，Prom Server 会产生一条报警，但会处于 `PENDING` 状态，而不会触发；在经过由 `for` 指定的一段时间后，如果报警条件依然满足，则报警状态变为 `FIRING`，触发报警。
+
+## Alertmanager 使用方法
+
+### 部署
+和 Prometheus Server 一样，Alertmanager 也是单文件可执行程序，也有官方提供的 Docker 镜像。  
+Alertmanager 的配置主要包含两部分：路由（route）和接收器（Receiver）。所有的告警信息都会从配置中的顶级路由进入路由树，根据路由规则将告警信息发送给相应的接收器。  
+配置成功后，在 Prom Server 的配置中添加内容，将 Prom Server 和 Alertmanager 关联起来。
+
+```yaml
+alerting:
+  alertmanagers:
+    - static_configs:
+        targets: ['localhost:9093']
+```
+
+### 配置路由
+Alertmanager 的路由为树状结构。  
+在匹配规则时，可以通警告名称（`alertname`）和报警标签（`labelname`）来进行匹配，匹配方式支持完全匹配和正则匹配。  
+如果 `continue` 的值为 `true`，则会将报警交由下一层节点，否则将会直接在当前节点进行处理。  
+路由配置格式如下：
+
+```yaml
+[ receiver: <string> ]
+[ continue: <boolean> | default = false ]
+
+match:
+  [ <labelname>: <labelvalue>, ... ]
+
+match_re:
+  [ <labelname>: <regex>, ... ]
+
+# 分组规则，如果多条报警的的某些标签值相等，则这些报警将会被归为一组
+[ group_by: '[' <labelname>, ... ']' ]
+[ group_wait: <duration> | default = 30s ]
+[ group_interval: <duration> | default = 5m ]
+[ repeat_interval: <duration> | default = 4h ]
+
+routes:       # 路由树的子节点
+  [ - <route> ... ]
+```
+
+### 配置接收器
+Alertmanager 默认支持多种接收器，如邮件，Slack 等，具体看[文档](https://prometheus.io/docs/alerting/configuration/)，同时也有多种基于 Webhook 的继承方式（如 Telegram Bot 和钉钉机器人），具体看[文档](https://prometheus.io/docs/operating/integrations/#alertmanager-webhook-receiver)，如果想自己制作 Webhook 接收器，只需要了解 [Webhook 格式](https://prometheus.io/docs/alerting/configuration/#webhook_config)即可。。
+
+配置报警具体消息时，可以使用 Go 模板来进行自定义。
+
+### 配置抑制 / 静默机制
+抑制机制的作用：用户在收到一条报警通知后，可以通过规则来屏蔽掉后续的其它报警，以免收到过多垃圾信息，影响问题分析。  
+栗子：如果集群炸了，那我们只需要收到“集群爆炸了”的报警消息就足够了，后面的一万个“A 服务不可用”“B 服务响应延迟 xxx 秒”的报警都不需要再报出来了。  
+抑制规则是长期规则，需要在 Alertmanager 配置文件中进行配置。
+
+如果只想临时关掉某些报警，管理员可以通过 Alertmanager 的 UI 来临时屏蔽满足规则的报警通知。  
+Alertmanager 的 UI 中可以创建静默规则，管理员可以配置报警匹配规则以及静默时间。
+
+## 杂项
+如果某些语句 / 报警规则的计算成本很高，那现场计算可能会导致 Prometheus 响应超时。此时可以通过配置 [Recording Rules](https://prometheus.io/docs/practices/rules/) 来在后台提前对结果进行运算。  
+这个功能有点像数据库索引… 
+
+# 第 4 章：使用 Exporter
+## 基本概念
+广义上讲，所有可以向 Prometheus 提供监控样本数据的程序都可以称作做 Exporter. 一个运行 Exporter 的实例称为一个 Target.  
+Prometheus 社区提供了非常丰富的 Exporter 实现，涵盖了从基础设施，中间件以及网络等各个方面的监控功能。
+
+Exporter 应通过 HTTP API 为 Prometheus Server 提供符合格式规范的内容。如：
+
+```
+# HELP HTTP Response amount
+# TYPE http_res_amount counter
+http_res_amount{code="200"} 123
+http_res_amount{code="400"} 12
+
+# HELP Example Histogram
+# TYPE example_histogram histogram
+example_histogram_bucket{le="0.1"}  1
+example_histogram_bucket{le="+inf"}  2
+example_histogram_sum  5
+example_histogram_count  3
+
+# HELP Example Summary
+# TYPE example_sumary sumary
+example_sumary{quantile="0.1"}  1
+example_sumary{quantile="0.5"}  2
+example_sumary_sum  5
+example_sumary_count  3
+```
+
+## Exporter 举例
+书中详细提到了三个 Exporter，分别是监控容器状态的 `cAdvidor`、监控 MySQL 运行状态的 `MySQLD Exporter` 和监控网络状态的 `Blackbox Exporter`.
+
+这里不详细展开讲，可以直接看[文档](https://prometheus.io/docs/instrumenting/exporters/)~~看花眼~~。
+
+## 集成 Exporter
+除了单独运行的 Exporter 程序外，我们还可以在自己的应用中集成一个 Exporter.  
+Prometheus 官方和社区为多种语言提供了[集成支持](https://prometheus.io/docs/instrumenting/clientlibs/)，使用这些库，则可以方便地在应用中提供 HTTP API，并在程序运行过程中进行指标收集。
+
+# 第 5 章：可视化一切
+Prometheus 提供了一个 Console Template，可以通过 Go 模板来配置任意控制台界面。  
+不过，这种配置方法非常麻烦，所以我们更推荐使用 Grafana 来创建美观的 Dashboard.
+
+## Grafana 设置
+基本概念：
+* 数据源（Data Source）
+* 仪表盘（Dashboard）
+* 行（Row）
+* 面板（Panel）
+
+### 创建 Dashboard
+Grafana 支持多种 Panel，我常用的有 Singlestat 和 Graph.
+
+Singlestat 用于展示当前状态，如 CPU 使用率等，而 Graph 用于展示指标随时间的变化。  
+Graph 创建时，如果设置的查询条件返回了多个指标，则可以画出多个图表，这一点非常棒。
+
+# 第 6 章：集群与高可用
+
+# 第 7 章：Prometheus 服务发现
+
+# 第 8 章：监控 Kubernetes
