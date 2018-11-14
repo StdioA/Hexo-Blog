@@ -58,7 +58,7 @@ class IRectangle(Interface):
 
 这似乎像是个学术问题 —— 直到我们认为正方形和矩形可以在某种意义上看做一个容器的侧面。在理解了这个例子以后，我们会处理更传统的容器，以解决更现实的案例。比如，考虑一下随机存取数组。
 
-我们现在有 `ISquare` 和 `IRectangle`，而且 `ISequere` 是 `IRectangle` 的子类。
+我们现在有 `ISquare` 和 `IRectangle`，而且 `ISquare` 是 `IRectangle` 的子类。
 
 我们希望把矩形放进随机存取数组中：
 

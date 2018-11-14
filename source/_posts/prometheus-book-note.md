@@ -5,7 +5,7 @@ tags:
   - 读书
 categories:
   - DevOps
-date: 2018-11-4 16:38:00
+date: 2018-11-13 22:45:00
 toc: true
 
 ---
@@ -335,6 +335,104 @@ Graph 创建时，如果设置的查询条件返回了多个指标，则可以�
 
 # 第 6 章：集群与高可用
 
+## 文件存储
+使用本地存储：Prometheus 将所有数据按照时间范围分片存储，按照两小时为一个时间窗口，每两小时的数据存在一个块中，每个块中包含该时间窗口内的所有样本数据、元数据文件以及索引文件。  
+通过时间窗口的形式保存数据，有利于 Prometheus 根据特定时间段进行数据查询。
+
+使用远程存储（Remote Storage）：为了满足持久化需求，Prometheus 可以使用外部存储方式存储样本数据。但 Prometheus 没有内置存储适配工具，而是提供两个标准接口，让用户通过这两个接口将数据保存到任意存储服务中。  
+两个标准接口为 `remote_read` 和 `remote_write`，基于 HTTP 协议，信息传递依赖 protobuf.  
+同时，Prometheus 社区也提供了部分对于第三方数据库的 Remote Storage 支持。具体可见[文档](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage)。
+
+## Prometheus 部署架构及高可用方案
+### 架构
+联邦集群：  
+如果样本来自多个数据中心，则可以在每个数据中心部署单独的 Prometheus Server，然后使用一个中心 Prom Server 从其它 Server 中通过 `/federate` 接口获取数据。  
+数据格式符合标准样本格式，所以对于中心 Server 来说，从其它 Server 获取数据和从 Exporter 获取数据实际上没有任何差异。
+
+功能分区：  
+如果单个集群中需要采集的数据过多，可以在集群中部署多个 Prom Server 实例，然后将不同的监控任务交给不同 Prom Server 处理，再由中心 Server 进行聚合。
+
+### Prometheus 高可用部署
+* 基本 HA：部署多个 Server，同时采集相同的 Exporter 目标；
+* 基本 HA + 远程存储：使用远程存储确保数据持久化，若 Server 发生宕机，可以快速恢复数据；
+* 基本 HA + 远程存储 + 联邦集群：添加联邦集群，在任务级别设置功能分区，将不同的采集任务划分至不同的 Server；  
+  适合大量采集任务，或多数据中心的场景；
+* 按照实例进行功能分区：通过 [relabel](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Crelabel_config%3E) 设置对所有实例进行 hash，并平均分至多个 Server 进行采集。
+
+高可用方案套餐搭配：
+* 服务可用性：主备 HA
+* 数据持久化：远程存储
+* 水平扩展：联邦集群
+
+### Alertmanager 高可用部署
+在 Prometheus Server 配置中，可以添加多个 Alertmanager 实例，在报警发生时，Server 会同时通知多个 Alertmanager.  
+而 Alertmanager 的 Gossip 机制可以保证同一个报警消息不会被重复发送。  
+这种分布式方案满足了 CAP 理论中的 AP，但不提供数据强一致性保证。
+
+通知流水线：
+1. 判断当前通知是否匹配静默规则；
+2. 根据 Alertmanager 在集群中的顺序等待一段时间，一般为 `(index * 5)s`；
+3. 判断当前消息是否被发送；若已发送则终止流水线；
+4. 发送消息；
+5. 使用 Gossip 机制通知集群中其它实例。
+
+![高可用通知流程](/pics/alertmanager-arch.svg)
+
+
 # 第 7 章：Prometheus 服务发现
 
+## 基础概念
+Prometheus 的服务发现原理：集群中存在一个服务注册中心（如 Consul 或 Etcd）保存着所有实例。Prometheus 定时从服务注册中心中获取服务列表，然后依据这个列表去抓取样本。
+
+## Prometheus 的服务发现方式
+通过 Prometheus Server，可以设置多种服务发现方式，如本地文件服务发现、DNS 服务发现、Kubernetes 服务发现等。  
+具体可以参考[官方配置文档](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)的 `<*_sd_config>` 部分。
+
+## Relabeling 机制
+在 Prometheus 所有 Target 实例中，会包含一些以双下划线开头的 Metadata 标签信息，比如 `__address__` 和 `_metrics_path__` 等。  
+Relabeling 机制可以将这些标签加以利用，如进行标签过滤、改变标签名称以用于查询，或对标签值进行 Hash 以完成功能分区等。
+
+具体可以看[文档](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config)。
+
 # 第 8 章：监控 Kubernetes
+## Kuberenetes 监控指标
+监控 Kubernetes 平台及应用时，在白盒层面需要关注：
+* 基础设施层（Node）
+* 容器基础设施（Container）
+* 用户应用（Pod）
+* Kubernetes 组件
+
+在黑盒层面需要关注：
+* 内部服务负载均衡（Service）
+* 外部访问入口（Ingress）
+
+## 在集群中部署 Prometheus 监控
+### 核心组件部署
+部署 Prometheus Server 时需要使用 ConfigMap 定义配置文件，并使用 Deployment 进行部署。  
+Prometheus 在 k8s 集群内的服务发现方式是通过与 Kubernetes API 集成，目前支持 5 种服务发现模式，分别是 Node, Service, Pod, Endpoint, Ingress.
+
+此外，CoreOS 提供了 [Prometheus Operator](https://coreos.com/blog/prometheus)，可以更加便捷的在 k8s 集群中部署及配置 Prometheus.
+
+### Exporter 部署
+* Kubernetes 内置了 `cAdvisor` 的支持，所以 Prometheus 可以直接通过 `cAdvisor` 获取容器指标；
+* 可以通过 DaemonSet 部署 NodeExporter 以获取每个 Node 的运行状态，注意不是 Deployment
+* 可以通过部署 Blackbox Exporter 来监控 Service 和 Ingress
+
+### 自定义 Pod 指标抓取
+在用户部署 Pod / Deployment / DaemonSet 时，如果需要 Prometheus 进行样本抓取，需要在 Pod Template 的 `metadata.annotations` 里添加如下内容：
+
+```yaml
+prometheus.io/scrape: 'true'
+prometheus.io/port: '9100'
+prometheus.io/path: 'metrics'
+```
+
+为了支持 Pod 内指标获取，在配置 Prometheus 时，需要进行 Relabel 配置，以过滤掉不支持样本获取的 Pod：
+```yaml
+- source_lables: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+  action: keep
+  regex: true
+```
+
+---
+这次根据整理的内容制作了一份思维导图，可以在[这里](/mindmaps/prom-book.svg)查看。
