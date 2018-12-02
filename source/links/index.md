@@ -4,5 +4,3 @@ layout: links
 comments: true
 sidebar: none
 ---
-
-[Resxkz](https://rexskz.info/)
