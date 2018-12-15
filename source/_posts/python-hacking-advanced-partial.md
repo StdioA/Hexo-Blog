@@ -52,7 +52,7 @@ def my_partial(*partial_args, **partial_kwargs):
         def wrapped(*args, **kwargs):
             args = partial_args + args
             partial_kwargs.update(kwargs)
-            return func(*(args), **partial_kwargs)
+            return func(*args, **partial_kwargs)
         return wrapped
     return decorator
 
