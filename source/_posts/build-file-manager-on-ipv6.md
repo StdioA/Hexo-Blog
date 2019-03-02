@@ -141,6 +141,8 @@ Nginx 配个反代，DNS 配一条 AAAA 记录，[acme.sh](https://github.com/Ne
 
 ![filerun](/pics/filerun.png)
 
+~~Update @ 2019.2.26：Nextcloud 真香 :new_moon_with_face:~~
+
 ## 还剩下一个小问题：DDNS
 路由器重启或重新拨号后，NAS 会拿到新的 IP，网站就无法正常访问了。  
 于是写了个脚本用 CloudFlare API 更改 DNS 记录，可以定时运行脚本，来更新 IP 地址。
@@ -186,5 +188,7 @@ if __name__ == '__main__':
 ```
 
 Ref: [Finding local IP addresses using Python's stdlib](https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib)
+
+哦对了，IP 更换之后，除了更新 DNS 记录，还要记得重新配置路由器防火墙。
 
 差不多就写这些了。
