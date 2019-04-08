@@ -12,7 +12,7 @@ sidebar: custom
 
 南京航空航天大学 2013级 信息安全专业
 
-[LCTT](http://lctt.github.io/) 成员，[扇贝网](https://www.shanbay.com/)后端工程师
+[LCTT](http://lctt.github.io/) 成员，曾经是[扇贝网](https://www.shanbay.com/)后端工程师
 
 曾经是天天缺觉的“特困生”，然而现在天天早睡早起（算是吧）
 
@@ -28,7 +28,7 @@ sidebar: custom
 
 ###### 编程语言
 
-C / C++ / Python / Go(刚刚开始) / Node.js
+C / C++ / Python（主要开发语言） / Go / Node.js（会一些)
 
 ###### Web 开发
 
@@ -47,7 +47,7 @@ Kubernetes / GitLab CI/CD
 
 ###### 编程工具
 
-代码编辑器: Sublime Text
+代码编辑器: Sublime Text & VS Code
 
 版本控制: Git（熟练）
 
@@ -59,7 +59,7 @@ Kubernetes / GitLab CI/CD
 
 [Coding仓库](https://coding.net/StdioA)
 
-[博客](https://blog.stdioa.com/)（[Github Pages分流](https://stdioa.github.io)）
+[博客](https://blog.stdioa.com/)
 
 [LCTT 主页](https://linux.cn/lctt/StdioA)
 
