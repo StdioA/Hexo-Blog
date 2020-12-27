@@ -56,7 +56,7 @@ Git 远端同样在树莓派上，是一个 [Gitea](https://gitea.io/zh-cn/) 实
 `python3 -m pip install beancount fava`，没什么特别的。  
 之前很多服务都是用 Docker 部署的，但是我的 Python 服务一直没有用 Docker 部署，而是直接装在了系统里，用 systemd 托管，可能是我的某种执念吧。
 
-Beancount 本身不需要守护进程，因为记账文件是直接用文本存储在系统中的，beancount 只是用来做查询。不过 fava 倒是可以以守护进程的方式部署起来。
+Beancount 本身不需要守护进程，因为记账文件是直接用文本存储在系统中的，beancount 只是用来做查询。不过 fava 服务倒是可以以守护进程的方式部署起来。
 
 ```systemd
 [Unit]
@@ -79,14 +79,15 @@ WantedBy=multi-user.target
 
 ### 数据导入
 万幸口袋记账提供了导出功能，可以将用户的全部交易记录以 xls 的格式导出。  
-导出之后，我写了一个极丑无比的 Python 脚本，将每条记录渲染成 Beancount 的交易格式，然后写入到 `main.bean` 文件中。
+口袋记账的收入支出、资产账户都有分类，于是我也沿用了之前的类别，并为其添加了前缀作为 Beancount 的账户名，比如“餐饮”变成了 `Expenses:Daily:餐饮`，工资变成了 `Income:xxx:工资`，而“微信支付”的账户就变成了 `Assets:Digital:微信支付:Deposit`。之前的博文有提到 Beancount 的账户名只能由英文组成，但我试了一下，只有顶级账户类型和一级描述不能用中文，再往下的层级并没有做限制。   
+随后我写了一个极丑无比的 Python 脚本，将每条记录渲染成 Beancount 的交易格式，然后写入到 `main.bean` 文件中。
 
-*最后平了下账，平出一比巨款来，可见之前记的账是多么多么不靠谱*:new_moon_with_face:
-
-在导入并与口袋记账上的统计数据作比对，确认数据无误后，我对项目结构做了一些调整：
+在导入数据并与口袋记账上的统计数据作比对，确认数据无误后，我对项目结构做了一些调整：
 * 将账户声明语句按照账户类型组织，单独存放在 `accounts/{类型}.bean` 中；
 * 将前几年的交易进行归档，存放在 `txs/{年份}.bean` 中；
 * 在 `main.bean` 中用 `include` 语句导入 `accounts/*.bean` 和 `txs/*.bean`。
+
+*最后平了下账，平出一比巨款来，可见之前记的账是多么多么不靠谱*:new_moon_with_face:
 
 这样，就有了以下的项目结构：
 
