@@ -134,7 +134,7 @@ markdown_it_plus:
 
 
 # hexo-neat
-neat_enable: true
+neat_enable: false
 neat_html:
   enable: true
   exclude:  
