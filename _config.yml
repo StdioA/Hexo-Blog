@@ -92,7 +92,7 @@ deploy:
   type: git
   repo: 
     github: git@github.com:StdioA/blog.git,master
-    coding: git@git.coding.net:StdioA/Blog.git,master
+    coding: git@e.coding.net:StdioA/Blog.git,master
 
 disqus_shortname: stdioa
 duoshuo: stdioa
