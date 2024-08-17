@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" modified="2024-08-17T12:36:06.092Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" etag="iS9ryS03q3uVsjoFoGbq" version="24.4.0" type="device">
+  <diagram name="第 1 页" id="RkmSXgTw7w5k5cljEfIm">
+    <mxGraphModel dx="1312" dy="727" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a30XqZx8vZtTTRrodK-v-7" value="query: 30 麦当劳 晚饭" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="20" y="235" width="140" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a30XqZx8vZtTTRrodK-v-12" target="a30XqZx8vZtTTRrodK-v-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-17" value="query 重写" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="a30XqZx8vZtTTRrodK-v-16">
+          <mxGeometry x="-0.2667" y="1" relative="1" as="geometry">
+            <mxPoint x="-1" y="8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-12" value="result: 麦当劳 晚饭 微信 餐饮" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="460" y="235" width="180" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-9" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="234" y="190" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-1" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="a30XqZx8vZtTTRrodK-v-9">
+          <mxGeometry x="10" width="160" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-2" value="麦当劳 晚饭 微信 餐饮" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="a30XqZx8vZtTTRrodK-v-9">
+          <mxGeometry x="20" y="61.36363636363637" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-3" value="哈啰单车 自行车 支付宝 出行" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="a30XqZx8vZtTTRrodK-v-9">
+          <mxGeometry y="85.90909090909092" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-4" value="……" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="a30XqZx8vZtTTRrodK-v-9">
+          <mxGeometry x="65" y="110.45454545454547" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=62.5;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a30XqZx8vZtTTRrodK-v-1" target="a30XqZx8vZtTTRrodK-v-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=62.5;entryPerimeter=0;" edge="1" parent="1" source="a30XqZx8vZtTTRrodK-v-7" target="a30XqZx8vZtTTRrodK-v-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="a30XqZx8vZtTTRrodK-v-15" target="a30XqZx8vZtTTRrodK-v-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-21" value="tx 生成" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="a30XqZx8vZtTTRrodK-v-20">
+          <mxGeometry x="-0.2571" y="3" relative="1" as="geometry">
+            <mxPoint x="4" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-15" value="30 微信 餐饮 晚饭 麦当劳" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="460" y="330" width="180" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="a30XqZx8vZtTTRrodK-v-19" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12.15px; white-space-collapse: preserve;&quot;&gt;2024-08-17 * &quot;麦当劳&quot; &quot;晚饭&quot;&lt;br&gt;  Assets:Checking:微信支付:Deposit   -30.00 CNY&lt;br&gt;  Expenses:Daily:餐饮&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=left;spacingLeft=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="700" y="235" width="360" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
