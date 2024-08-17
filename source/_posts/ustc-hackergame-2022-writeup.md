@@ -317,12 +317,12 @@ Stacktrace:
 各位还是移步[官方题解](https://github.com/USTC-Hackergame/hackergame2022-writeups/blob/master/official/%E4%BC%81%E9%B9%85%E6%8B%BC%E7%9B%98/README.md)好啦。
 
 # 后续
-周六比赛结束后，官方发了题解，于是去看了下想做但没思路的[《安全的在线测评》](https://github.com/USTC-Hackergame/hackergame2022-writeups/blob/master/official/%E5%AE%89%E5%85%A8%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%B5%8B%E8%AF%84/README.md)》和[《杯窗鹅影》](https://github.com/USTC-Hackergame/hackergame2022-writeups/blob/master/official/%E6%9D%AF%E7%AA%97%E9%B9%85%E5%BD%B1/README.md)，又涨了不少姿势。
+周六比赛结束后，官方发了题解，于是去看了下想做但没思路的[《安全的在线测评》](https://github.com/USTC-Hackergame/hackergame2022-writeups/blob/master/official/%E5%AE%89%E5%85%A8%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%B5%8B%E8%AF%84/README.md)和[《杯窗鹅影》](https://github.com/USTC-Hackergame/hackergame2022-writeups/blob/master/official/%E6%9D%AF%E7%AA%97%E9%B9%85%E5%BD%B1/README.md)，又涨了不少姿势。
 
-太久没玩 CTF 了，周一玩了大半天，晚上靠着手速冲到了 58 名，虽然最后掉到了 134 名，不过还是蛮有成就感的。  
+太久没玩 CTF 了，本来基础就不够好，好多解题思路就只能靠 Google。周一玩了大半天，晚上靠着手速冲到了 58 名，虽然最后掉到了 134 名，不过还是蛮有成就感的。  
 听浩子哥哥说，这几年的 CTF 的题基本都是赛棍特供，没想到 USTC 的大佬们能够设计出这么精彩的题目，在此感谢各位出题的同学。
 
-最后放两张图留个纪念吧，希望明年这个时候我还能记得 hackergame 2023。
+最后放两张图留个纪念吧，希望明年这个时候我还能记得 hackergame 2023.
 
 ![](/pics/hackergame2022/rank58.png)
 ![](/pics/hackergame2022/final.png)
