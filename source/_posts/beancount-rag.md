@@ -1,4 +1,4 @@
-title: RAG 基本应用 —— 记账效率优化
+title: RAG 基本应用——Beacount 记账效率优化
 author: David Dai
 tags:
   - 记账
@@ -10,17 +10,17 @@ categories:
 date: 2024-08-17 21:20:00
 toc: true
 ---
-一个手工记账博主的脑洞大开，通过向量数据库和 RAG 来想办法让自己能再少打几个字。顺便宣传一下最近开源的[记账 bot](https://github.com/StdioA/beancount-bot).
+本文来自于一个手工记账博主的脑洞大开，尝试通过向量数据库和 RAG 来想办法让自己少打几个字。顺便宣传一下最近开源的[记账 bot](https://github.com/StdioA/beancount-bot).
 
 <!--more-->
 # 背景
-自从 2020 年将记账系统迁移到 Beancount 后，我[开发了一个 Telegram Bot](https://blog.stdioa.com/2020/09/using-beancount/#telegram-bot) 来辅助我记账，我可以通过 `{金额} {流出账户} [{流入账户}] {payee} {narration} [{tag1} {tag2}]` 的文法来快速生成一条交易记录并落库。虽然后来将这个 Bot 迁移到了 Mattermost 上，但四年以来，核心逻辑并没有做任何改动。
+自从 2020 年将记账系统迁移到 Beancount 后，我就[开发了一个 Telegram Bot](https://blog.stdioa.com/2020/09/using-beancount/#telegram-bot) 来辅助我记账。通过它，我可以使用 `{金额} {流出账户} [{流入账户}] {payee} {narration} [{tag1} {tag2}]` 的文法来快速生成一条交易记录并落库。虽然后来将这个 Bot 迁移到了 Mattermost 上，但四年以来，核心逻辑并没有做任何改动。
 
-最近经常骑车去打球，但每次骑完车之后总需要掏出手机去记账，诸如 `1.5 支付宝 哈啰单车 自行车`。虽然已经手动记账记了七年，但相同的东西记得次数太久了，难免会有写枯燥。  
-前一阵子刚好在 GitHub 上刷到了基于 sqlite 的向量数据库方案 [sqlite-vec](https://github.com/asg017/sqlite-vec)，因此正好趁这个机会来试试有没有可能通过系统性的手段，进一步降低单笔记账所需的字符数。
+最近经常骑车去打球，每次骑完车之后总需要掏出手机去记账，输入诸如 `1.5 支付宝 哈啰单车 自行车` 的文本。虽然已经手动记账记了七年，但完全相同的内容记得次数太多了，也难免会有些枯燥。  
+前一阵子刚好在 GitHub 上刷到了基于 sqlite 的向量数据库方案 [sqlite-vec](https://github.com/asg017/sqlite-vec)，正好趁这个机会来对 RAG 做一个初步体验，探索一下是否存在系统性的手段，可以进一步降低单笔记账所需的字符数。
 
 # 基础知识
-RAG （Retrieval-Augmented Generation, 增强检索生成）这个概念在 2020 年最初提出，旨在提升大语言模型本身在回答问题时的准确性问题。在 2023 年 LLM 进入爆炸式发展后，人们也在不断地对 RAG 进行改进。  
+RAG（Retrieval-Augmented Generation, 增强检索生成）这个概念在 2020 年最初提出，旨在提升大语言模型本身在回答问题时的准确性问题。在 2023 年 LLM 进入爆炸式发展后，人们也在不断地对 RAG 进行改进。  
 简单来说，RAG 的过程就是预先通过 embedding 技术构建一个离线的向量数据库；在用户提问时，从向量数据库检索到最相关的部分信息，然后将其作为参考信息和用户的问题一起喂给 LLM，这样 LLM 的回答就更有可能依据给出的参考信息来进行生成，出现幻觉的可能性更低。
 
 从网上找到了一个比较简洁的 RAG 流程图（[图片来源](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)）：
@@ -50,7 +50,7 @@ _都说汉字的序顺并不定一能影阅响读，但 embedding 不会完全�
 ![RAG 流程图](/pics/beancount-rag/rag.png)
 
 # 尾声
-开发完成后尝试用了两天，匹配效果还不错，RAG 在 `gpt-4o-mini` 和 `DeepSeek-V2-Chat` 上的效果都能令我满意。不过我并不太需要使用 RAG，因此日常用的更多的还是向量数据库匹配的模式。
+开发完成后，两种匹配模式都尝试用了几天。向量匹配效果还不错，绝大多数情况下，前两个候选输出中就能够包含目标结果；RAG 在 `gpt-4o-mini` 和 `DeepSeek-V2-Chat` 模型上的效果都能令我满意。不过我并不太需要使用 RAG，因此日常用的更多的还是向量数据库匹配的模式。
 
 <img alt="补全效果" src="/pics/beancount-rag/result.png" style="max-width: 50%">
 

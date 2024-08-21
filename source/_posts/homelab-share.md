@@ -13,6 +13,8 @@ toc: true
 大学毕业之前一个冲动买了台式机，又一个冲动买了台 Linux 主机。到现在它已经运行了四年多了，简单分享下自己的玩法。
 <!--more-->
 
+> 注：本文与 2024 年 8 月进行过一次修订，对内容进行了一些更新和补充。补充的部分会以引用的形式添加在文章中。
+
 # 背景
 毕业之前在公司附近租了房，再加上受到了网络的蛊惑，于是陷入了“买一台 NAS 来大幅提高生活质量”的念头之中。看了很多成熟的 NAS 方案（比如群辉或威联通），最后还是在高昂的价格面前望而却步。  
 当时的我，傻乎乎地认为品牌 NAS 的平台只是“SMB + RAID + 媒体服务器”而已，那么既然成熟的方案那么贵，为什么不搞个 Linux 自己折腾呢？脱离了平台的束缚，反而可能有更多的可能性。  
@@ -53,6 +55,8 @@ toc: true
 
 写这篇文章的时候翻了下淘宝，发现这几年 Intel 推出了更多低功耗但性能更强的 CPU，然而这些 CPU 大多数都拿去做成了成套的 NAS、NUC 和工控机方案，貌似很难再买到 J3455-ITX 这种主板 + CPU 的组合了。
 
+> 在 2024 年，由于市场对软路由的稳定需求，因此很多小厂商开发了搭载 N100 或 J4125 的 ITX 方案，目前选择比 2021 年要多了不少。
+
 此外，由于主机的硬盘太过吵闹，有时为了享受更好的睡眠，我不得不关掉它的电源，所以我又买了一块可安安静静挂机的树莓派 4，并将一部分我认为比较重要的软件挪到了它的上面。  
 最近在机缘巧合之下又收了一块树莓派，不过目前处于在线但闲置的状态，跑了个 k3s 偶尔玩一玩。
 
@@ -79,7 +83,7 @@ toc: true
 除了 NAS 之外，我们还需要搭建一个基础的平台用于托管各种应用，平台的组成大致如下：
 1. Docker：用于容器托管。很多流行的应用都有官方或社区维护的 Docker 镜像，使用 Docker 部署应用能够大幅降低部署成本
 2. [Gogs](https://gogs.io/)：用于管理 Git 仓库，后来换成了 [Gitea](https://gitea.io/zh-cn/)
-3.  [frps & frpc](https://github.com/fatedier/frp)：服务端搭建在腾讯云上，客户端通过 Docker 部署在主机中，实现 tcp 和 http 的内网穿透
+3. [frps & frpc](https://github.com/fatedier/frp)：服务端搭建在腾讯云上，客户端通过 Docker 部署在主机中，实现 tcp 和 http 的内网穿透
 4.  一个用来组织和管理服务脚本和配置的 Git 仓库，远端存储在 Gitea 中
 5.  一些用于日常操作的基础工具，如 git, vim 和 tmux
 
@@ -101,7 +105,7 @@ toc: true
 | [Loki](https://grafana.com/oss/loki/) & promtail | 日志收集平台及组件，负责聚合主机、容器和网关请求日志 | docker |
 | [Drone](https://www.drone.io/) & Drone Runner | CI 平台，搭配 Gitea 使用 | docker |
 | [Clash](https://github.com/Dreamacro/clash) | 代理服务器 | docker |
-| [yacd](https://github.com/haishanh/yacd) | clash 管理面板 | caddy 静态托管 |
+| [yacd](https://github.com/haishanh/yacd) | Clash 管理面板 | caddy 静态托管 |
 | [aria2](https://aria2.github.io/) | 下载工具，支持 HTTP、BT 和磁力链接 | docker |
 | [AriaNg](https://github.com/mayswind/AriaNg) | aria2 管理面板 | caddy 静态托管 |
 | [Sync Home](https://www.resilio.com/individuals/) | 专有软件，P2P 文件分享，也可用于文件同步 | docker |
@@ -110,11 +114,22 @@ toc: true
 | [WebDAV](https://github.com/hacdias/webdav) | WebDAV 服务，托管 Joplin 中的笔记内容 | docker |
 | [Tiny Tiny RSS](https://tt-rss.org/) | RSS 阅读器，用于替代 Feedly | docker，有人专门做了[容器化部署方案](https://ttrss.henry.wang/#deployment-via-docker) |
 | [rss-proxy](https://git.stdioa.com/stdioa/rss-proxy) | 一个极为简陋的 HTTP 反向代理，方便 TT-RSS 抓取资源 | docker |
-| [fava](https://github.com/beancount/fava) & beanbot | Beancount UI 和 Telegram bot，详见[《开始使用 Beancount》](/2020/09/using-beancount/) | systemd |
-| [snapdrop](https://snapdrop.net/) | 基于 WebRTC 的本地网络文件传输工具 | docker |
+| [fava](https://github.com/beancount/fava) & [beancount-bot](https://github.com/StdioA/beancount-bot) | Beancount UI 和 Telegram bot，详见[《开始使用 Beancount》](/2020/09/using-beancount/) | systemd |
+| [Snapdrop](https://snapdrop.net/) / [PairDrop](https://github.com/schlagmichdoch/pairdrop) | 基于 WebRTC 的本地网络文件传输工具 | docker |
+| [Mattermost](https://https://www.navidrome.org/) | 音乐管理软件，私有云音乐 | docker | 
+| [Navidrome](https://mattermost.com/) | 即时通讯软件，主要用做 Chatbot（Beancount 记账和 LLM 交互）平台 | docker | 
+| [VaultWarden](https://github.com/dani-garcia/vaultwarden) | 与 BitWarden 兼容的密码管理器服务端 | docker | 
+| [Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF) | PDF 处理应用 | docker | 
+| [Calibre](https://calibre-ebook.com/) & [Calibre Web](https://github.com/janeczku/calibre-web) | 图书管理 & 在线阅读（不过目前还是主要在用 iBooks）| docker | 
 
 ## 网络
 服务部署可以通过 docker 轻松搞定，然而绝大部分服务都是通过 Web UI 进行交互的，所以我们还需要找到一个快捷的方案来从内网或外网访问这些服务。
+
+在本文初次完成的 2021 年，我主要使用 frp 来完成内网穿透，但在 2024 年，能够选择的解决方案就非常多了，我目前使用过的方案有：
+* Cloudflare IPv6 直连（可选 proxy）
+* Cloudflare Tunnel
+* frp
+* Tailscale
 
 ### HTTP
 处理 DNS 解析时，为了访问方便，我在内网中通过 `dnsmasq` 代理了顶级域名 `s.` 的解析请求：将 `*.s` 的域名全部解析到主机的固定 IP，针对某些希望暴露到公网的服务，我会将 `*.stdioa.com` 的域名解析到很久很久以前买的腾讯云学生机上。
@@ -123,24 +138,52 @@ toc: true
 请求拓扑结构大致如下：
 ![请求拓扑结构](/pics/homelab/topo.png)
 
+----
+> 在 2024 年对本文进行修订时，笔者认为使用 CloudFlare 将内网服务暴露到公网也是一个不错的主意，这样可以省下一台 VPS 的钱，也无需再申请 IPv4 的公网 IP，只需 IPv6 的 IP 即可。不过某些小众宽带运营商和偏远地区的移动网络对 Cloudflare 的可访问性并不够高，因此需要结合使用地区的实际情况来选择合适的方案。
+> 
+> 使用 Cloudflare 主要有几种姿势：
+> * DNS 直连（可以使用 Cloudflare 的 Proxy 来避免源站暴露，并为只有 V6 公网 IP 的家庭宽带添加双栈支持）
+>   注：如果用 IPv6 直连，则大概率需要搭配 DDNS 使用，并确认路由器和光猫对 IPv6 防火墙的支持程度。可以参考[以前的文章](/2019/02/build-file-manager-on-ipv6/)。
+> * Cloudflare Tunnel（无需暴露源站端口，但在国内的稳定性不佳）
+> * Cloudflare Worker + 优选 IP（我尝试过但延迟过高，或许是使用姿势不对）
+> 
+> 关于这几种方案的具体使用方法，网上已有相当多的文章，本文不再赘述。目前我主要使用的是前两种方案，frp 虽然依然在运行，但几乎不再承接 HTTP 流量。
+----
+
 这样，Web 访问的问题就解决了，但偶尔还会有一些特殊的情况发生。
 
 ### SSH
-在外偶尔会有一些针对 NAS 或树莓派的运维需求，或者可能只是连到树莓派上去编辑一下 beancount 的交易记录，此时就需要通过 SSH 来连接到主机，通过 shell 来进行操作。
-
+在外偶尔会有一些针对 NAS 或树莓派的运维需求，或者可能只是连到树莓派上去编辑一下 beancount 的交易记录，此时就需要通过 SSH 来连接到主机，通过 shell 来进行操作。  
 此时我同样用到了 frp：建立一个 TCP 代理，将 NAS 的 22 端口映射到腾讯云上的某端口，即可通过 SSH 来连接这个端口。
+
+----
+> 在运维方面，SSH 是非常重要的连接手段，为了保证链路的可用性，我构建了多条不同的链路：
+> 1. 通过 Tailscale VPN 直接连接；
+> 2. 通过 frp 建立一个 TCP 代理，将 NAS 的 22 端口映射到腾讯云上的某端口，通过腾讯云做跳板连接，通常用于使用别人的电脑（或工作机）时进行临时登录；
+> 3. 通过 [Cloudflare Zero Trust](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/#connect-to-ssh-server-with-cloudflared-access) 在浏览器中启动终端。
+> 
+> ~~虽然做了链路冗余，但停电和断网的风险并没有被考虑在内。~~
+----
 
 ### 在外访问内网服务
 出于安全考虑，我不会把涉及到隐私的服务（比如 Fava）暴露在公网上。但有时还是要访问一些不想暴露到公网的服务，或临时搭建的服务，所以需要想办法访问到内网主机的端口。
 
-此时至少有三种端口映射方案：
+在本文初次撰写时，我想到了三种端口映射方案：
 * 配置 frpc tcp 代理规则，临时将内网的端口暴露到公网
 * 通过 SSH 隧道，将内网的端口映射到本地
 * 如果你恰巧正在[使用 VSCode 通过 SSH 进行远程开发](https://code.visualstudio.com/docs/remote/ssh)，那也可以用 VSCode 来快速配置[端口映射](https://code.visualstudio.com/docs/remote/ssh#_forwarding-a-port-creating-ssh-tunnel)。
 
-或者，我们还可以配置 VPN 作为终极解决方案。  
-写这篇文章时，我恰好接触到了 [tailscale](https://tailscale.com/). 它是一个安全的虚拟组网产品，而且配置十分简单，只需要十分钟即可将终端设备直接接入内网。因此，如果需要高频访问内网服务的话，可以考虑直接使用 tailscale 来完成。  
-不过需要注意的是：tailscale 是一个商业产品。如果你对自己的数据安全十分担忧，可以考虑使用 [nebula](https://github.com/slackhq/nebula) 这样的自建组网方案作为替代。
+但其实我们还可以配置 VPN 作为终极解决方案。  
+在写这篇文章时，我恰好接触到了 [Tailscale](https://tailscale.com/). 它是一个安全的虚拟组网产品，配置十分简单，且拥有相当高的 NAT 穿透成功率（此处推荐[一篇好文](https://tailscale.com/blog/how-nat-traversal-works)）。因此，如果需要高频访问内网服务的话，可以考虑直接使用 Tailscale 来完成。  
+不过需要注意的是：tailscale 是一个商业产品。如果你对自己的数据安全十分担忧，可以考虑使用 [nebula](https://github.com/slackhq/nebula), [Zerotier](https://www.zerotier.com/) 或 [headscale](https://github.com/juanfont/headscale) 这样的自建组网方案作为替代。
+
+----
+> 在 2024 年重新回顾这篇文章时，由于 Tailscale 优秀的体验，我已经完全使用 Tailscale 来访问内网服务了。主要的方案如下：
+> * 在 Tailscale 后台配置子网（subnets），将 NAS 设置家中内网网段的网络出口，这样家中设备（如路由器、NAS 和树莓派）均可以经由 NAS，通过内网 IP 直接访问；
+> * 在电脑上安装 dnsmasq，在解析内网域名 `*.s` 时，使用家中路由器的地址作为上游 DNS 服务器。
+>
+> 使用这种方案，除了可以无痛访问内网的 Web 服务外，甚至还可以通过 NVIDIA GameStream 和 Moonlight 为游戏进行串流，实现在 MacBook Air 上打 PC 游戏的梦想。在 1080P 60 帧的分辨率下，游戏延迟只有 30ms，甚至连绝区零都可以勉强玩起来。虽然这套方案比不上米哈游自己的云游戏，但至少不用花钱。
+----
 
 ## 数据备份
 俗话说：“备份不做，十恶不赦”。但不得不承认我的经济实力和盘位都十分有限，没有办法做 RAID，所以只好选择性地备份某些比较重要的数据，如 Gitea Repo，WebDAV 中的笔记内容，以及 PC 内的文件等。

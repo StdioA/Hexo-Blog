@@ -119,7 +119,7 @@ WantedBy=multi-user.target
 
 <img style="max-height: 60vh;" src="/pics/beancount-bot.jpg" />
 
-~~顺便安利一下，FAT PHO 的河粉相当好吃~~
+**目前（2024 年 8 月），[我的 Beancount bot 已经开源](https://github.com/StdioA/beancount-bot)，并添加了一些实用的补全功能，欢迎大家使用。**
 
 ### 除此之外
 每天睡觉前会将当日的更改提交，并做好备份；顺便做了 `pre-commit` 的 Git 钩子，用于规范文件格式；  
