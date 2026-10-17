@@ -132,21 +132,3 @@ markdown_it_plus:
     typographer:
     quotes: “”‘’
     pre_class: highlight
-
-
-# hexo-neat
-neat_enable: false
-neat_html:
-  enable: true
-  exclude:  
-neat_css:
-  enable: true
-  exclude:
-    - '*.min.css'
-neat_js:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude:
-    - '*.min.js'
