@@ -1,9 +1,10 @@
-title: RAG 基本应用——Beacount 记账效率优化
+title: RAG 基本应用——Beancount 记账效率优化
 author: David Dai
 tags:
   - 记账
   - Beancount
-  - fava
+  - LLM
+  - RAG
   - Python
 categories:
   - 乱七八糟
